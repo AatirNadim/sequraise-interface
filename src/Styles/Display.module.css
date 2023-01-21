@@ -1,0 +1,44 @@
+.div__main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 50vw;
+    height: 10vh;
+    /* background-color: #f5f5f5; */
+    border : 1px solid black;
+}
+
+.div__first {
+    /* background-color: green; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+
+
+.id__area {
+    /* background-color: red; */
+    margin: 1vh;
+}
+.date__time__parent {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: fit-content;    
+    /* flex-direction: ; */
+}
+
+.date__time {
+    margin-right: 0;
+    margin: 1vh;
+}
+
+.div__second {
+    /* background-color: red; */
+    background-color: red;
+    width: 100%;
+    margin: 1vh;
+}
