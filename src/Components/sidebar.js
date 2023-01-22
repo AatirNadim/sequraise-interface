@@ -4,7 +4,7 @@ const Sidebar = () => {
     return (
         <div
         style={{backgroundColor : '#00b8f1',
-        height : '95vh',
+        height : '93vh',
         display : 'flex',
         flexdirection : 'column', 
         justifyContent : 'space-between',

@@ -5,7 +5,7 @@ const Topbar = () => {
     return (
         <div
             style={{
-                height: "5vh",
+                height: "7vh",
                 backgroundColor: "#001c7b",
                 display: "flex",
                 justifyContent: "space-between",
@@ -14,21 +14,78 @@ const Topbar = () => {
 
             }}
         >
-            <div 
-            style={{
-                color: "#018581",
-                fontFamily : 'serif',
-                fontWeight: "bold",
-            }}
-            >
-                SEQUR
-                <span
+            {/* sequraise */}
+            <div
                 style={{
-                    color: "#e6020c",
-                    fontSize : '20px'
+                    color: "#018581",
+                    fontFamily: 'serif',
+                    fontWeight: "bold",
+                    fontSize: '3vh',
+                    flex: 0.5,
                 }}
+            >
+                <span
+                    style={{
+                        fontSize: '4vh',
+                    }}
+                >S</span>
+                EQUR
+                <span
+                    style={{
+                        color: "#e6020c",
+                        fontSize: '4vh'
+                    }}
                 >AI</span>
                 SE
+            </div>
+            {/* labels --> male, female */}
+            <div
+                style={{
+                    display: "flex",
+                    flex: 0.5,
+                    justifyContent: "space-between",
+                }}
+            >
+                <div>
+                    <input
+                        style={{
+                            background: 'transparent',
+                            border: 'none',
+                            borderBottom: '1px solid #fff',
+
+                        }}
+                    >
+                    </input>
+                    <img src = "/search_icon_240.svg" alt = "search_icon"
+                    style={{
+                        height : '5vh',
+                    }}
+                    />
+                </div>
+                <div
+                    style={{
+                        display: "flex",
+                    }}
+                >
+                    <div
+                        style={{
+                            backgroundColor: "#92d050",
+                            marginRight: "10px",
+                            padding: "5px 10px",
+                        }}
+                    >
+                        {'temp10'}
+                    </div>
+                    <div
+                        style={{
+                            backgroundColor: "#ff0000",
+                            color: "#fff",
+                            padding: "5px 10px",
+                        }}
+                    >
+                        {'temp20'}
+                    </div>
+                </div>
             </div>
         </div>
     )

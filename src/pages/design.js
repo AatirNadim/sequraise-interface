@@ -10,7 +10,7 @@ const Design = () => {
             <Topbar />
             <div
                 style={{
-                    height: "95vh",
+                    height: "93vh",
                     display: "flex",
                     justifyContent: "space-between",
                     backgroundColor: "gray"
