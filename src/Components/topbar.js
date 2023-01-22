@@ -21,7 +21,7 @@ const Topbar = () => {
                     fontFamily: 'serif',
                     fontWeight: "bold",
                     fontSize: '3vh',
-                    flex: 0.5,
+                    flex: 0.6,
                 }}
             >
                 <span
@@ -42,11 +42,18 @@ const Topbar = () => {
             <div
                 style={{
                     display: "flex",
-                    flex: 0.5,
+                    flex: 0.4,
                     justifyContent: "space-between",
                 }}
             >
-                <div>
+                <div
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+
+                }}
+                >
                     <input
                         style={{
                             background: 'transparent',
@@ -56,9 +63,9 @@ const Topbar = () => {
                         }}
                     >
                     </input>
-                    <img src = "/search_icon_240.svg" alt = "search_icon"
+                    <img src = "/icons8-search.svg" alt = "search_icon"
                     style={{
-                        height : '5vh',
+                        height : '20px',
                     }}
                     />
                 </div>

@@ -21,11 +21,12 @@ const Sidebar = () => {
                 // height : 'fit-content',
             }}
             >
-                <img src="/Hamburger_icon.svg.png" alt="sandwich icon" 
+                <img src="/icons8-menu-rounded-96.png" alt="sandwich icon" 
                 style={{
-                    height : '50px',
+                    height : '45px',
                     marginLeft : '7px',
                     color : 'white',
+                    marginTop : '7px',
                 }}
                 />
             </div>

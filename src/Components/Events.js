@@ -42,7 +42,7 @@ export const Events = () => {
                 display: "flex",
                 justifyContent: "space-between",
                 height: "100%",
-                padding: "0 20px",
+                padding: "0",
             }}
         >
             <div
@@ -55,52 +55,70 @@ export const Events = () => {
                     <ProfileCard
                         key={selected?.key}
                         props={selected}
-                    /> :<div>No data currently</div>
+                    /> : <div>No data currently</div>
                 }
             </div>
             <div
-                style={{
-                    flex: "35%",
-                    border: "1px solid black",
-                    height: "80%",
-                    padding: "20px",
-                    boxShadow: "0 0 10px 0 rgba(0,0,0,0.5)",
-                    borderRadius: "2px",
-                    overflow: "auto",
-                    marginTop: "20px",
-                    backgroundColor: "white"
-                }}
+            style={{
+                flex: "35%",
+                backgroundColor: "#d9d9d9",
+                padding: "0 10px",
+            }}
             >
-                <h1>Events</h1>
+                <div
+                    style={{
+                        
+                        // border: "1px solid black",
+                        height: '93%',
+                        padding: "0 20px",
+                        // boxShadow: "0 0 10px 0 rgba(0,0,0,0.5)",
+                        // borderRadius: "2px",
+                        overflow: "auto",
+                        marginTop: "20px",
+                        boxSizing: "border-box",
+                        backgroundColor: "#fff",
+                        // paddingTop: "2px"
+                    }}
+                >
+                    <div>
+                        <h1
+                            style={{
+                                marginTop: "12px",
+                                fontSize: "3vh",
+                            }}
+                        >Events</h1>
+                        <img src="" alt="" />
 
-                <button onClick={getData}>Get Data</button>
-                {loading ? (<div>Loading...</div>) : (
-                    <div
-                        style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "space-between",
-                            height: "100%",
-                            gap: "10px",
-                            marginTop: "10px"
-                        }}
-                    >
-                        {
-                            data?.map((item) => (
-                                <div
-                                    style={{
-
-                                    }}
-                                    onClick={() => {
-                                        setSelected(item)
-                                    }}
-                                >
-                                    <Display key={item.key} props={item} />
-                                </div>
-                            ))
-                        }
                     </div>
-                )}
+                    <button onClick={getData}>Get Data</button>
+                    {loading ? (<div>Loading...</div>) : (
+                        <div
+                            style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "space-between",
+                                height: "100%",
+                                gap: "10px",
+                                marginTop: "10px"
+                            }}
+                        >
+                            {
+                                data?.map((item) => (
+                                    <div
+                                        style={{
+
+                                        }}
+                                        onClick={() => {
+                                            setSelected(item)
+                                        }}
+                                    >
+                                        <Display key={item.key} props={item} />
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     );
