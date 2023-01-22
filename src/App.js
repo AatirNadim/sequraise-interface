@@ -10,7 +10,7 @@ import Design from './pages/design';
 function App() {
   return (
     <div>
-      <Dropdown />
+      <Design  />
     </div>
   );
 }

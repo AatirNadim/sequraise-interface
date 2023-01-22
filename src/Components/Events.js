@@ -13,6 +13,8 @@ export const Events = () => {
   const [data, setData] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   const [selected, setSelected] = React.useState(null);
+  const [showFilterMenu, setShowFilterMenu] = React.useState(false);
+  const [imageUrl, setImageUrl] = React.useState(null);
 
   const getData = () => {
     setLoading(true);
@@ -34,6 +36,32 @@ export const Events = () => {
     setLoading(false);
 
   }
+
+  const getImagePerson = (name) => {
+    const dbRef = ref(getDatabase());
+    get(child(dbRef, `/`)).then((snapshot) => {
+      if (snapshot.exists()) {
+        const obj = snapshot.val();
+        const arr = Object.entries(obj).map(
+          ([key, value]) => ({ key, value })
+        );
+        const person = arr.find((item) => item.value.name === name);
+        setSelected(person);
+      } else {
+        console.log("No data available");
+      }
+    }).catch((error) => {
+      console.error(error);
+    });
+  }
+
+
+  // React.useEffect(() => {
+  //   if (selected?.Name) {
+  //     getImagePerson(selected.Name)
+  //   }
+  // }, [selected?.Name]);
+
   return (
     <div
       style={{
@@ -95,15 +123,27 @@ export const Events = () => {
             >Events</h1>
 
             {/* add onclick event to img */}
-            <img src="/filter.png" alt="filter_menu"
+            <div
+              onClick={(e) => {
+                // console.log(e);
+                setShowFilterMenu(!showFilterMenu);
+              }
+              }
               style={{
-                height: "50px",
-                onClick: (e) => {
-                  console.log(e);
-                },
-
+                backgroundColor: "#fff",
+                cursor: "pointer",
+                position: "relative",
               }}
-            />
+            >
+              <img src="/filter.png" alt="filter_menu"
+                style={{
+                  height: "50px",
+
+
+                }}
+              />
+              {showFilterMenu && <Dropdown />}
+            </div>
             {/* <Dropdown/> */}
 
           </div>
