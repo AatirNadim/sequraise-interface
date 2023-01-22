@@ -32,10 +32,6 @@ export const Events = () => {
         setLoading(false);
 
     }
-
-
-
-
     return (
         <div
             style={{
@@ -43,6 +39,7 @@ export const Events = () => {
                 justifyContent: "space-between",
                 height: "100%",
                 padding: "0",
+                backgroundColor: "#fff",
             }}
         >
             <div
@@ -80,14 +77,30 @@ export const Events = () => {
                         // paddingTop: "2px"
                     }}
                 >
-                    <div>
+                    <div
+                    style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                    }}
+                    >
                         <h1
                             style={{
                                 marginTop: "12px",
                                 fontSize: "3vh",
                             }}
                         >Events</h1>
-                        <img src="" alt="" />
+                        {/* add onclick event to img */}
+                        <img src="/filter.png" alt="filter_menu" 
+                        style={{
+                            height: "50px",
+                            onClick : (e) => {
+                                console.log(e);
+                            },
+                            
+                        }}
+                        />
 
                     </div>
                     <button onClick={getData}>Get Data</button>
