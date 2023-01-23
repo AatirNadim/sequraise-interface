@@ -13,13 +13,14 @@ const Display = ({ props }) => {
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
-                backgroundColor: `${props.active ? "#d9d9d9" : "white"}`,
+                backgroundColor: `${props.active ? "#7f7f7f" : "#d9d9d9"}`,
                 fontWeight: "600",
                 fontSize: "13px",
                 borderRadius: "2px",
-                boxShadow: "0 0 5px 0 rgba(0,0,0,0.5)",
-                border: "1px solid black",
-                cursor: "pointer"
+                // boxShadow: "0 0 5px 0 rgba(0,0,0,0.5)",
+                // border: "1px solid black",
+                cursor: "pointer",
+                color: `${props.active ? "white" : "black"}`,
             }}
         >
             <div

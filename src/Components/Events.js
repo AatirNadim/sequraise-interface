@@ -88,7 +88,7 @@ export const Events = ({ props }) => {
               paddingTop: "2vh",
               paddingLeft: "2vh",
             }}
-          >No props item selected</div>
+          >No data item selected</div>
         }
       </div>
 
@@ -134,13 +134,19 @@ export const Events = ({ props }) => {
             <div
               style={{
                 backgroundColor: "#fff",
-                cursor: "pointer",
+                // cursor: "pointer",
                 position: "relative",
               }}
             >
               <div
+
+              style={{
+                cursor: "pointer",
+              }}
                 onClick={(e) => {
+                  console.log("clicked");
                   setShowFilterMenu(!showFilterMenu);
+
                 }
                 }
               >

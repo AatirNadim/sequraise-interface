@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { useRecoilState } from 'recoil'
 import { months } from './atoms/constants'
@@ -11,7 +11,10 @@ export const Dropdown = () => {
     e.preventDefault()
     setFilterType({ ...filterType, [e.target.getAttribute('entry')]: e.target.getAttribute('value') })
   }
-
+  // abhi add kiya
+  // useEffect(() => {
+  //   console.log(filterType)
+  // }, [filterState])
 
   return (
     <div
@@ -27,6 +30,9 @@ export const Dropdown = () => {
         zIndex: '1',
         borderRadius: '10px',
         paddingBottom: '10px',
+        overflow: 'auto',
+        border: '1px solid black',
+        boxShadow: '0 0 5px 0 rgba(0,0,0,0.5)', 
       }}
     >
       {/* location */}
@@ -61,10 +67,14 @@ export const Dropdown = () => {
               borderRadius: '0px',
               height: '30px',
               fontWeight: 'bold',
-              backgroundColor: 'white',
+              backgroundColor: `${filterType.location === 'Chennai' ? '#8c8c8c' : 'white'}`,
               marginRight: '10px',
               marginLeft: '4px',
-              width: '8vw',
+              // width: '8vw',
+              color: `${filterType.location === 'Chennai' ? 'white' : 'black'}`,
+              cursor: 'pointer',
+              borderRadius: '5px',
+              boxShadow: `${filterType.location === 'Chennai' ? '0 0 5px 0 rgba(0,0,0,0.5)' : 'none'}`
             }}
             entry="location"
             label="Chennai"
@@ -82,8 +92,12 @@ export const Dropdown = () => {
               borderRadius: '0px',
               height: '30px',
               fontWeight: 'bold',
-              backgroundColor: 'white',
+              backgroundColor: `${filterType.location === 'Hyderabad' ? '#8c8c8c' : 'white'}`,
               marginRight: '10px',
+              color: `${filterType.location === 'Hyderabad' ? 'white' : 'black'}`,
+              cursor: 'pointer',
+              borderRadius: '5px',
+              boxShadow: `${filterType.location === 'Hyderabad' ? '0 0 5px 0 rgba(0,0,0,0.5)' : 'none'}`
             }}
           >Hyderabad</button>
           <button
@@ -96,8 +110,12 @@ export const Dropdown = () => {
               borderRadius: '0px',
               height: '30px',
               fontWeight: 'bold',
-              backgroundColor: 'white',
+              backgroundColor: `${filterType.location === 'Bangalore' ? '#8c8c8c' : 'white'}`,
               marginRight: '10px',
+              color: `${filterType.location === 'Bangalore' ? 'white' : 'black'}`,
+              cursor: 'pointer',
+              borderRadius: '5px',
+              boxShadow: `${filterType.location === 'Bangalore' ? '0 0 5px 0 rgba(0,0,0,0.5)' : 'none'}`
             }}
           >Bangalore</button>
         </div>
@@ -135,9 +153,13 @@ export const Dropdown = () => {
               borderRadius: '0px',
               height: '30px',
               fontWeight: 'bold',
-              backgroundColor: 'white',
+              backgroundColor: `${filterType.gender === 'Male'? '#8c8c8c' : 'white'}`,
               marginRight: '10px',
               marginLeft: '4px',
+              color:`${filterType.gender === 'Male'? 'white' : 'black'}`,
+              cursor: 'pointer',
+              borderRadius: '5px',
+              boxShadow: `${filterType.gender === 'Male' ? '0 0 5px 0 rgba(0,0,0,0.5)' : 'none'}`
             }}
           >{'Male'}</button>
           <button
@@ -150,8 +172,12 @@ export const Dropdown = () => {
               borderRadius: '0px',
               height: '30px',
               fontWeight: 'bold',
-              backgroundColor: 'white',
+              backgroundColor: `${filterType.gender === 'Female'? '#8c8c8c' : 'white'}`,
               marginRight: '10px',
+              color:`${filterType.gender === 'Female'? 'white' : 'black'}`,
+              cursor: 'pointer',
+              borderRadius: '5px',
+              boxShadow: `${filterType.gender === 'Female' ? '0 0 5px 0 rgba(0,0,0,0.5)' : 'none'}`
             }}
           >{'Female'}</button>
         </div>
@@ -166,6 +192,7 @@ export const Dropdown = () => {
           alignItems: 'center',
           justifyContent: 'end',
           paddingRight: '10px',
+          borderRadius: '5px',
         }}
       >
         <input
@@ -184,6 +211,7 @@ export const Dropdown = () => {
               location: 'ALL',
               gender: 'ALL',
               date: 'ALL',
+              
             })
           }}
           style={{
@@ -194,6 +222,8 @@ export const Dropdown = () => {
             backgroundColor: 'white',
             marginRight: '10px',
             marginLeft: '14px',
+            cursor: 'pointer',
+            borderRadius: '5px',
           }}
         >
           Clear all filters
