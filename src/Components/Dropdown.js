@@ -4,18 +4,12 @@ import { useRecoilState } from 'recoil'
 import { filterState } from './atoms/filterAtom'
 
 export const Dropdown = () => {
-  const [filterType, setFilterType] = React.useState('')
-  const [filterObj, setFilterObj] = useRecoilState(filterState);
+  const [filterType, setFilterType] = useRecoilState(filterState)
 
   const handleClick = (e) => {
-    // setFilterType(e.target.getAttribute('entry'))
-    // console.log(e.target.getAttribute('entry'))
-    let temp = e.target.getAttribute('entry')
-    console.log(temp)
-    console.log(e.target.getAttribute('value'))
-    setFilterObj({ ...filterObj, [temp]: e.target.getAttribute('value') })
-    console.log(filterObj)
+    setFilterType({ ...filterType, [e.target.getAttribute('entry')]: e.target.getAttribute('value') })
   }
+
 
   return (
     <div
@@ -182,14 +176,14 @@ export const Dropdown = () => {
       </div>
       <div>
         <button
-        label="clearfilters"
-        onclick = {() => {
-          setFilterObj({
-            location: '',
-            gender : '',
-            date : ''
-          })
-        }}
+          label="clearfilters"
+          onClick={() => {
+            setFilterType({
+              location: 'ALL',
+              gender: 'ALL',
+              date: 'ALL',
+            })
+          }}
           style={{
             border: 'none',
             borderRadius: '0px',

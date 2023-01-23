@@ -5,8 +5,6 @@ import { useRecoilState } from 'recoil'
 import { displayState } from './atoms/displayAtom'
 
 const Display = ({ props }) => {
-    const [displayBool, setDisplayBool] = useRecoilState(displayState)
-
     return (
         <div
             style={{
@@ -15,12 +13,12 @@ const Display = ({ props }) => {
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
-                backgroundColor: "#d9d9d9",
+                backgroundColor: `${props.active ? "#d9d9d9" : "white"}`,
                 fontWeight: "600",
                 fontSize: "13px",
-                // borderRadius: "2px",
-                // boxShadow: "0 0 5px 0 rgba(0,0,0,0.5)",
-                // border: "1px solid black"
+                borderRadius: "2px",
+                boxShadow: "0 0 5px 0 rgba(0,0,0,0.5)",
+                border: "1px solid black",
                 cursor: "pointer"
             }}
         >

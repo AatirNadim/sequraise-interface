@@ -10,6 +10,7 @@ import { getDatabase, ref, child, get, set } from "firebase/database";
 import Display from "./Display";
 import ProfileCard from "./profileCard";
 
+import { displayState } from "./atoms/displayAtom";
 import { Dropdown } from "./Dropdown";
 import { useRecoilState } from "recoil";
 import { countState } from "./atoms/countAtom";
@@ -19,13 +20,34 @@ export const Events = () => {
   const [loading, setLoading] = React.useState(false);
   const [selected, setSelected] = React.useState(null);
   const [showFilterMenu, setShowFilterMenu] = React.useState(false);
-  const [imageUrl, setImageUrl] = React.useState(null);
-
+  const [activeIndex, setActiveIndex] = React.useState(-1);
   const [count, setCount] = useRecoilState(countState);
+  const [filter, setFilter] = useRecoilState(filterState);
+
+  const filterData = () => {
+    let filteredArray = data;
+    if (filter.location === "All") {
+      setData(filteredArray);
+    }
+    else {
+      if (filter.location !== "All") {
+        filteredArray = filteredArray.filter((item) => item.value.Location === filter.location);
+        setData(filteredArray);
+      }
+      if (filter.date !== "All") {
+        filteredArray = filteredArray.filter((item) => item.value.Date === filter.date);
+        setData(filteredArray);
+
+      }
+      if (filter.gender !== "All") {
+        filteredArray = filteredArray.filter((item) => item.value.Gender === filter.gender);
+        setData(filteredArray);
+      }
+    }
+  }
 
 
-  // is this allowed
-  const [filterObj, setFilterObj] = useRecoilState(filterState);
+
 
   const getData = () => {
     setLoading(true);
@@ -35,11 +57,13 @@ export const Events = () => {
       if (snapshot.exists()) {
         const obj = snapshot.val();
         arr = Object.entries(obj).map(
+          // ([key, value]) => ({ key, value })
+          //add only those items which are according to the filter          
           ([key, value]) => ({ key, value })
         );
         var countBoys = 0;
         var countGirls = 0;
-        arr.forEach((item) => {
+        arr?.forEach((item) => {
           if (item.value.Gender === "Male") {
             countBoys++;
           }
@@ -47,8 +71,8 @@ export const Events = () => {
             countGirls++;
           }
         });
-        setCount({ countBoys: countBoys, countGirls: countGirls })
         setData(arr);
+        setCount({ countBoys: countBoys, countGirls: countGirls })
       } else {
         console.log("No data available");
       }
@@ -59,34 +83,15 @@ export const Events = () => {
 
   }
 
-  const getImagePerson = (name) => {
-    const dbRef = ref(getDatabase());
-    get(child(dbRef, `/`)).then((snapshot) => {
-      if (snapshot.exists()) {
-        const obj = snapshot.val();
-        const arr = Object.entries(obj).map(
-          ([key, value]) => ({ key, value })
-        );
-        const person = arr.find((item) => item.value.name === name);
-        setSelected(person);
-      } else {
-        console.log("No data available");
-      }
-    }).catch((error) => {
-      console.error(error);
-    });
-  }
-
-
-  // React.useEffect(() => {
-  //   if (selected?.Name) {
-  //     getImagePerson(selected.Name)
-  //   }
-  // }, [selected?.Name]);
-
   useEffect(() => {
     getData();
-  }, [filterObj])
+  }, [])
+
+
+  useEffect(() => {
+    filterData();
+  }, [, filter])
+
   return (
     <div
       style={{
@@ -201,10 +206,15 @@ export const Events = () => {
 
                   }}
                   onClick={() => {
+                    setActiveIndex(item.key)
                     setSelected(item)
                   }}
                 >
-                  <Display key={item.key} props={item} />
+                  {item.key === activeIndex ?
+                    <Display key={item.key} props={{ ...item, active: true }} />
+                    :
+                    <Display key={item.key} props={{ ...item, active: false }} />
+                  }
                 </div>
               ))
             }
