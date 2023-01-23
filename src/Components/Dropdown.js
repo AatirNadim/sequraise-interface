@@ -1,9 +1,20 @@
 import React from 'react'
 
+import { useRecoilState } from 'recoil'
+import { filterState } from './atoms/filterAtom'
+
 export const Dropdown = () => {
   const [filterType, setFilterType] = React.useState('')
+  const [filterObj, setFilterObj] = useRecoilState(filterState);
+
   const handleClick = (e) => {
-    setFilterType(e.target.value)
+    // setFilterType(e.target.getAttribute('entry'))
+    // console.log(e.target.getAttribute('entry'))
+    let temp = e.target.getAttribute('entry')
+    console.log(temp)
+    console.log(e.target.getAttribute('value'))
+    setFilterObj({...filterObj, [temp]: e.target.getAttribute('value')})
+    console.log(filterObj)
   }
 
   return (
@@ -57,7 +68,7 @@ export const Dropdown = () => {
               marginRight: '10px',
               marginLeft: '4px',
             }}
-
+            entry= "Location"
             label="Chennai"
             value="Chennai"
             onClick={handleClick}
@@ -66,6 +77,7 @@ export const Dropdown = () => {
           <button
             label="Hyderabad"
             value="Hyderabad"
+            entry= "Location"
             onClick={handleClick}
             style={{
               border: 'none',
@@ -79,6 +91,7 @@ export const Dropdown = () => {
           <button
             label="Bangalore"
             value="Bangalore"
+            entry= "Location"
             onClick={handleClick}
             style={{
               border: 'none',
@@ -117,6 +130,7 @@ export const Dropdown = () => {
           <button
             label="Male"
             value="Male"
+            key = "Gender"
             onClick={handleClick}
             style={{
               border: 'none',
@@ -131,6 +145,7 @@ export const Dropdown = () => {
           <button
             label="Female"
             value="Female"
+            key = "Gender"
             onClick={handleClick}
             style={{
               border: 'none',
@@ -158,6 +173,7 @@ export const Dropdown = () => {
         <input
           onChange={(e) => {
             handleClick(e)
+            
             console.log(e.target.value)
           }
           }

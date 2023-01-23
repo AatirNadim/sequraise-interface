@@ -147,6 +147,8 @@ const ProfileCard = ({ props }) => {
                 style={{
                     flex: 0.5,
                     height: "100%",
+                    // backgroundColor: "red",
+                    paddingTop: "3vh",
                 }}
             >
                 <div
@@ -157,13 +159,17 @@ const ProfileCard = ({ props }) => {
                 >
                     {props?.value.Gender}
                 </div>
-                <div>
+                <div
+                style={{
+                    paddingTop: "1vh",
+                }}
+                >
                     <LazyLoadImage
                         effect='blur'
                         alt={"NOT AVAILABLE"}
-                        height={100}
+                        height={450}
                         src={image} // use normal <img> attributes as props
-                        width={100}
+                        width={300}
                         placeholderSrc="https://www.cgsusa.org/wp-content/uploads/cropped-placeholder.jpg"
                     />
                 </div>

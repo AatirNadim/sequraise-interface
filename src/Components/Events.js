@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { db } from "../firebaseConfig";
+
+import { filterState } from "./atoms/filterAtom";
+
 
 // import { getDatabase, ref, onValue} from "firebase/database";
 import { getDatabase, ref, child, get, set } from "firebase/database";
@@ -17,7 +20,12 @@ export const Events = () => {
   const [selected, setSelected] = React.useState(null);
   const [showFilterMenu, setShowFilterMenu] = React.useState(false);
   const [imageUrl, setImageUrl] = React.useState(null);
+
   const [count, setCount] = useRecoilState(countState);
+
+
+  // is this allowed
+  const [filterObj, setFilterObj] = useRecoilState(filterState);
 
   const getData = () => {
     setLoading(true);
@@ -76,6 +84,9 @@ export const Events = () => {
   //   }
   // }, [selected?.Name]);
 
+  useEffect(() => {
+    getData();
+  }, [filterObj])
   return (
     <div
       style={{
