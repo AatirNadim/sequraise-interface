@@ -13,7 +13,7 @@ export const Dropdown = () => {
     let temp = e.target.getAttribute('entry')
     console.log(temp)
     console.log(e.target.getAttribute('value'))
-    setFilterObj({...filterObj, [temp]: e.target.getAttribute('value')})
+    setFilterObj({ ...filterObj, [temp]: e.target.getAttribute('value') })
     console.log(filterObj)
   }
 
@@ -23,13 +23,14 @@ export const Dropdown = () => {
         display: 'flex',
         flexDirection: 'column',
         width: '25vw',
-        height: '33vh',
-        backgroundColor: "#d9d9d9",
+        height: '36vh',
+        backgroundColor: "red",
         position: 'absolute',
         top: "8vh",
         right: "0",
         zIndex: '1',
         borderRadius: '10px',
+        paddingBottom: '10px',
       }}
     >
       {/* location */}
@@ -68,7 +69,7 @@ export const Dropdown = () => {
               marginRight: '10px',
               marginLeft: '4px',
             }}
-            entry= "Location"
+            entry="location"
             label="Chennai"
             value="Chennai"
             onClick={handleClick}
@@ -77,7 +78,7 @@ export const Dropdown = () => {
           <button
             label="Hyderabad"
             value="Hyderabad"
-            entry= "Location"
+            entry="location"
             onClick={handleClick}
             style={{
               border: 'none',
@@ -91,7 +92,7 @@ export const Dropdown = () => {
           <button
             label="Bangalore"
             value="Bangalore"
-            entry= "Location"
+            entry="location"
             onClick={handleClick}
             style={{
               border: 'none',
@@ -130,7 +131,7 @@ export const Dropdown = () => {
           <button
             label="Male"
             value="Male"
-            key = "Gender"
+            entry="gender"
             onClick={handleClick}
             style={{
               border: 'none',
@@ -145,7 +146,7 @@ export const Dropdown = () => {
           <button
             label="Female"
             value="Female"
-            key = "Gender"
+            entry="gender"
             onClick={handleClick}
             style={{
               border: 'none',
@@ -173,11 +174,34 @@ export const Dropdown = () => {
         <input
           onChange={(e) => {
             handleClick(e)
-            
+
             console.log(e.target.value)
           }
           }
           type="date" />
+      </div>
+      <div>
+        <button
+        label="clearfilters"
+        onclick = {() => {
+          setFilterObj({
+            location: '',
+            gender : '',
+            date : ''
+          })
+        }}
+          style={{
+            border: 'none',
+            borderRadius: '0px',
+            height: '30px',
+            fontWeight: 'bold',
+            backgroundColor: 'white',
+            marginRight: '10px',
+            marginLeft: '14px',
+          }}
+        >
+          {'Clear all filters'}
+        </button>
       </div>
     </div>
   )

@@ -1,8 +1,12 @@
 import React from 'react'
 
 import styles from '../Styles/Display.module.css'
+import { useRecoilState } from 'recoil'
+import { displayState } from './atoms/displayAtom'
 
 const Display = ({ props }) => {
+    const [displayBool, setDisplayBool] = useRecoilState(displayState)
+
     return (
         <div
             style={{
@@ -17,6 +21,7 @@ const Display = ({ props }) => {
                 // borderRadius: "2px",
                 // boxShadow: "0 0 5px 0 rgba(0,0,0,0.5)",
                 // border: "1px solid black"
+                cursor: "pointer"
             }}
         >
             <div
@@ -39,7 +44,8 @@ const Display = ({ props }) => {
 
                     }}
                 >
-                    <span>{props.value.ID}</span>
+                    <span>{props.value.ID}{': '}</span>
+                    <span>{' '}</span>
                     <span>{props.value.Location}</span>
                 </div>
                 <div

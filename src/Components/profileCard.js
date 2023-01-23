@@ -46,6 +46,7 @@ const ProfileCard = ({ props }) => {
                 backgroundColor: "white",
                 display: "flex",
                 flexDirection: "row",
+                height: "93vh",
             }}
         >
             {/* <h1>{props.name}</h1> */}

@@ -82,7 +82,7 @@ const Topbar = () => {
                         style={{
                             backgroundColor: "#92d050",
                             marginRight: "10px",
-                            padding: "5px 10px",
+                            padding: "5px 20px",
                         }}
                     >
                         {count?.countBoys}
@@ -91,7 +91,7 @@ const Topbar = () => {
                         style={{
                             backgroundColor: "#ff0000",
                             color: "#fff",
-                            padding: "5px 10px",
+                            padding: "5px 20px",
                         }}
                     >
                         {count?.countGirls}

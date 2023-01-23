@@ -92,7 +92,7 @@ export const Events = () => {
       style={{
         display: "flex",
         justifyContent: "space-between",
-        height: "100%",
+        height: "93vh",
         padding: "0",
         backgroundColor: "#fff",
       }}
@@ -100,16 +100,26 @@ export const Events = () => {
       <div
         style={{
           flex: "65%",
-
+          height: "93vh",
+          // backgroundColor: "red",
         }}
       >
         {selected ?
           <ProfileCard
             key={selected?.key}
             props={selected}
-          /> : <div>No data currently</div>
+          /> : <div
+            style={{
+              fontSize: "3vh",
+              fontWeight: "bold",
+              paddingTop: "2vh",
+              paddingLeft: "2vh",
+            }}
+          >No data item selected</div>
         }
       </div>
+
+      {/* the right section */}
       <div
         style={{
           flex: "35%",
@@ -121,12 +131,12 @@ export const Events = () => {
           style={{
 
             // border: "1px solid black",
-            height: '93%',
+            height: '97%',
             padding: "0 20px",
             // boxShadow: "0 0 10px 0 rgba(0,0,0,0.5)",
             // borderRadius: "2px",
             overflow: "auto",
-            marginTop: "20px",
+            marginTop: "10px",
             boxSizing: "border-box",
             backgroundColor: "#fff",
             // paddingTop: "2px"
@@ -172,34 +182,34 @@ export const Events = () => {
             {/* <Dropdown/> */}
 
           </div>
-          <button onClick={getData}>Get Data</button>
-          {loading ? (<div>Loading...</div>) : (
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                height: "100%",
-                gap: "10px",
-                marginTop: "10px"
-              }}
-            >
-              {
-                data?.map((item) => (
-                  <div
-                    style={{
+          {/* <button onClick={getData}>Get Data</button> */}
+          {/* {loading ? (<div>Loading...</div>) : ( */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              height: "100%",
+              gap: "10px",
+              marginTop: "10px"
+            }}
+          >
+            {
+              data?.map((item) => (
+                <div
+                  style={{
 
-                    }}
-                    onClick={() => {
-                      setSelected(item)
-                    }}
-                  >
-                    <Display key={item.key} props={item} />
-                  </div>
-                ))
-              }
-            </div>
-          )}
+                  }}
+                  onClick={() => {
+                    setSelected(item)
+                  }}
+                >
+                  <Display key={item.key} props={item} />
+                </div>
+              ))
+            }
+          </div>
+          {/* )} */}
         </div>
       </div>
     </div>
