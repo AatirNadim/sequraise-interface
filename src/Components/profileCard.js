@@ -71,16 +71,19 @@ const ProfileCard = ({ props }) => {
                 style={{
                     display: "flex",
                     flexDirection: "column",
-                    justifyContent: "space-around",
+                    justifyContent: "flex-start",
                     flex: 0.5,
                     height: "93vh",
+                    paddingTop: "15vh",
                 }}
 
             >
                 {/* person detected vla */}
                 <div
                     style={{
-                        backgroundColor: "red",
+                        // backgroundColor: "red",
+                        paddingLeft: "10px",
+                        flex: 0.1,
                     }}
                 >
                     <div
@@ -102,9 +105,12 @@ const ProfileCard = ({ props }) => {
                     style={{
                         display: "flex",
                         flexDirection: "column",
-                        backgroundColor: "green",
-                        height: "30%",
+                        // backgroundColor: "green",
+                        height: "20%",
                         justifyContent: "space-around",
+                        paddingLeft: "10px",
+                        paddingTop: "3vh",
+                        fontWeight: "450",
                     }}
 
                 >
@@ -126,10 +132,14 @@ const ProfileCard = ({ props }) => {
                 {/* description */}
                 <div
                     style={{
-                        backgroundColor: "yellow",
+                        // backgroundColor: "yellow",
+                        paddingLeft: "10px",
+                        paddingTop: "3vh",
                     }}
                 >
-                    <div>{'Description'}</div>
+                    <div>
+                        {props?.value.Name}{' detected at '}{props?.value.Location}{' on '}{props?.value.Date}
+                    </div>
                 </div>
             </div>
             {/* image and gender */}

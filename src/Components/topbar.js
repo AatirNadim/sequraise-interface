@@ -3,7 +3,7 @@ import { useRecoilState } from 'recoil';
 import { countState } from './atoms/countAtom';
 const Topbar = () => {
     const [count, setCount] = useRecoilState(countState);
-    console.log(count);
+    // console.log(count);
 
 
     return (
