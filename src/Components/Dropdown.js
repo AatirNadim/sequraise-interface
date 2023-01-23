@@ -1,12 +1,14 @@
 import React from 'react'
 
 import { useRecoilState } from 'recoil'
+import { months } from './atoms/constants'
 import { filterState } from './atoms/filterAtom'
 
 export const Dropdown = () => {
   const [filterType, setFilterType] = useRecoilState(filterState)
 
   const handleClick = (e) => {
+    e.preventDefault()
     setFilterType({ ...filterType, [e.target.getAttribute('entry')]: e.target.getAttribute('value') })
   }
 
@@ -18,7 +20,7 @@ export const Dropdown = () => {
         flexDirection: 'column',
         width: '25vw',
         height: '36vh',
-        backgroundColor: "red",
+        backgroundColor: "#d9d9d9",
         position: 'absolute',
         top: "8vh",
         right: "0",
@@ -62,6 +64,7 @@ export const Dropdown = () => {
               backgroundColor: 'white',
               marginRight: '10px',
               marginLeft: '4px',
+              width: '8vw',
             }}
             entry="location"
             label="Chennai"
@@ -167,9 +170,8 @@ export const Dropdown = () => {
       >
         <input
           onChange={(e) => {
-            handleClick(e)
-
-            console.log(e.target.value)
+            const a = (e.target.value).split('-')
+            setFilterType({ ...filterType, date: `${a[2][0] === '0' ? a[2][1] : a[2]}-${months[a[1] - 1]}-${a[0].substring(2, 4)}` })
           }
           }
           type="date" />
@@ -194,7 +196,7 @@ export const Dropdown = () => {
             marginLeft: '14px',
           }}
         >
-          {'Clear all filters'}
+          Clear all filters
         </button>
       </div>
     </div>

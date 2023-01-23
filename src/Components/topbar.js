@@ -63,7 +63,7 @@ const Topbar = () => {
                             background: 'transparent',
                             border: 'none',
                             borderBottom: '1px solid #fff',
-
+                            color: '#fff',
                         }}
                     >
                     </input>

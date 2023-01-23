@@ -1,5 +1,6 @@
 import React from 'react'
 import { Events } from '../Components/Events'
+import ParentEvent from '../Components/ParentEvent'
 import ProfileCard from '../Components/profileCard'
 import Sidebar from '../Components/sidebar'
 import Topbar from '../Components/topbar'
@@ -28,7 +29,7 @@ const Design = () => {
                         flex: 0.95
                     }}>
 
-                    <Events />
+                    <ParentEvent />
                 </div>
             </div>
         </>

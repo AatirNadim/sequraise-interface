@@ -46,75 +46,49 @@ const ProfileCard = ({ props }) => {
                 backgroundColor: "white",
                 display: "flex",
                 flexDirection: "row",
-                height: "93vh",
+                height: "90vh",
             }}
         >
-            {/* <h1>{props.name}</h1> */}
-            {/* <div */}
-            {/* style={{ */}
-            {/* backgroundColor: "white", */}
-            {/* }} */}
-            {/* > */}
-            {/* <div> */}
-            {/* //details card  */}
-            {/* </div> */}
-            {/* <div> */}
-            {/* //image card  */}
-            {/* {loading ? <div>loading....</div> : <img src={image} height="100" width="100" />} */}
-            {/* </div> */}
-            {/* <h1>{props.name}</h1> */}
 
-
-
-            {/* </div> */}
-            {/* details */}
             <div
                 style={{
                     display: "flex",
                     flexDirection: "column",
-                    justifyContent: "flex-start",
                     flex: 0.5,
-                    height: "93vh",
-                    paddingTop: "15vh",
                 }}
 
             >
-                {/* person detected vla */}
-                <div
-                    style={{
-                        // backgroundColor: "red",
-                        paddingLeft: "10px",
-                        flex: 0.1,
-                    }}
-                >
-                    <div
-                        style={{
-                            // backgroundColor: "blue",
-                            fontWeight: "600",
-                            fontSize: "17px",
-                        }}
-                    >{props?.value.ID}</div>
-                    <div
-                        style={{
-                            fontWeight: "600",
-                        }}
-                    >{'Person detected'}</div>
-                    {/* skdjskkd */}
-                </div>
-                {/* details */}
+
                 <div
                     style={{
                         display: "flex",
                         flexDirection: "column",
-                        // backgroundColor: "green",
-                        height: "20%",
-                        justifyContent: "space-around",
+                        height: "100%",
                         paddingLeft: "10px",
-                        paddingTop: "3vh",
                         fontWeight: "450",
+                        verticalAlign: "center",
+                        justifyContent: "center",
+                        gap: "10px",
                     }}
 
                 >
+                    <div
+                        style={{
+                            marginBottom: "30px",
+                        }}
+                    >
+                        <div
+                            style={{
+                                fontWeight: "600",
+                                fontSize: "17px",
+                            }}
+                        >{props?.value.ID}</div>
+                        <div
+                            style={{
+                                fontWeight: "600",
+                            }}
+                        >Person detected</div>
+                    </div>
                     <div
                     >
                         {'Name: '}{props?.value.Name}
@@ -129,41 +103,43 @@ const ProfileCard = ({ props }) => {
                     <div>
                         {'Time: '}{props?.value.Time}
                     </div>
-                </div>
-                {/* description */}
-                <div
-                    style={{
-                        // backgroundColor: "yellow",
-                        paddingLeft: "10px",
-                        paddingTop: "3vh",
-                    }}
-                >
-                    <div>
-                        {props?.value.Name}{' detected at '}{props?.value.Location}{' on '}{props?.value.Date}
+                    <div
+                        style={{
+                            marginTop: "30px",
+                        }}
+                    >
+                        <div>
+                            {props?.value.Name}{' detected at '}{props?.value.Location}{' on '}{props?.value.Date}
+                        </div>
                     </div>
                 </div>
+                {/* description */}
             </div>
-            {/* image and gender */}
             <div
                 style={{
                     flex: 0.5,
+                    display: "flex",
+                    flexDirection: "column",
                     height: "100%",
-                    // backgroundColor: "red",
-                    paddingTop: "3vh",
+                    justifyContent: "center",
+                    verticalAlign: "center",
+                    gap: "10px",
                 }}
             >
                 <div
                     style={{
                         fontSize: "2vw",
                         fontWeight: "bolder",
+                        marginLeft: "10px",
                     }}
                 >
                     {props?.value.Gender}
                 </div>
                 <div
-                style={{
-                    paddingTop: "1vh",
-                }}
+                    style={{
+                        // paddingTop: "1vh",
+                        paddingLeft: "10px",
+                    }}
                 >
                     <LazyLoadImage
                         effect='blur'

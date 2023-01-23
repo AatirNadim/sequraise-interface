@@ -6,91 +6,59 @@ import { filterState } from "./atoms/filterAtom";
 
 
 // import { getDatabase, ref, onValue} from "firebase/database";
-import { getDatabase, ref, child, get, set } from "firebase/database";
 import Display from "./Display";
 import ProfileCard from "./profileCard";
-
-import { displayState } from "./atoms/displayAtom";
 import { Dropdown } from "./Dropdown";
 import { useRecoilState } from "recoil";
 import { countState } from "./atoms/countAtom";
 
-export const Events = () => {
-  const [data, setData] = React.useState([]);
-  const [loading, setLoading] = React.useState(false);
+
+export const Events = ({ props }) => {
   const [selected, setSelected] = React.useState(null);
   const [showFilterMenu, setShowFilterMenu] = React.useState(false);
   const [activeIndex, setActiveIndex] = React.useState(-1);
-  const [count, setCount] = useRecoilState(countState);
   const [filter, setFilter] = useRecoilState(filterState);
+  const [arr, setArr] = React.useState(props);
+  const [loading, setLoading] = React.useState(false);
+  const [count, setCount] = useRecoilState(countState);
+
 
   const filterData = () => {
-    let filteredArray = data;
-    if (filter.location === "All") {
-      setData(filteredArray);
-    }
-    else {
-      if (filter.location !== "All") {
-        filteredArray = filteredArray.filter((item) => item.value.Location === filter.location);
-        setData(filteredArray);
-      }
-      if (filter.date !== "All") {
-        filteredArray = filteredArray.filter((item) => item.value.Date === filter.date);
-        setData(filteredArray);
-
-      }
-      if (filter.gender !== "All") {
-        filteredArray = filteredArray.filter((item) => item.value.Gender === filter.gender);
-        setData(filteredArray);
-      }
-    }
-  }
-
-
-
-
-  const getData = () => {
     setLoading(true);
-    let arr = [];
-    const dbRef = ref(getDatabase());
-    get(child(dbRef, `/`)).then((snapshot) => {
-      if (snapshot.exists()) {
-        const obj = snapshot.val();
-        arr = Object.entries(obj).map(
-          // ([key, value]) => ({ key, value })
-          //add only those items which are according to the filter          
-          ([key, value]) => ({ key, value })
-        );
-        var countBoys = 0;
-        var countGirls = 0;
-        arr?.forEach((item) => {
-          if (item.value.Gender === "Male") {
-            countBoys++;
-          }
-          else {
-            countGirls++;
-          }
-        });
-        setData(arr);
-        setCount({ countBoys: countBoys, countGirls: countGirls })
-      } else {
-        console.log("No data available");
+    let filteredArray = props;
+    if (filter.location === "ALL" && filter.date === "ALL" && filter.gender === "ALL") {
+      setArr(props);
+    }
+    if (filter.location !== "ALL") {
+      filteredArray = filteredArray.filter((item) => item.value.Location === filter.location);
+      setArr(filteredArray);
+    }
+    if (filter.date !== "ALL") {
+      filteredArray = filteredArray.filter((item) => item.value.Date === filter.date);
+      setArr(filteredArray);
+    }
+    if (filter.gender !== "ALL") {
+      filteredArray = filteredArray.filter((item) => item.value.Gender === filter.gender);
+      setArr(filteredArray);
+    }
+    var countBoys = 0;
+    var countGirls = 0;
+    filteredArray?.forEach((item) => {
+      if (item.value.Gender === "Male") {
+        countBoys++;
       }
-    }).catch((error) => {
-      console.error(error);
+      else {
+        countGirls++;
+      }
     });
+    setCount({ countBoys: countBoys, countGirls: countGirls })
     setLoading(false);
-
   }
-
-  useEffect(() => {
-    getData();
-  }, [])
-
 
   useEffect(() => {
     filterData();
-  }, [, filter])
+  }, [props, filter.date, filter.gender, filter.location])
+
 
   return (
     <div
@@ -120,7 +88,7 @@ export const Events = () => {
               paddingTop: "2vh",
               paddingLeft: "2vh",
             }}
-          >No data item selected</div>
+          >No props item selected</div>
         }
       </div>
 
@@ -164,62 +132,65 @@ export const Events = () => {
 
             {/* add onclick event to img */}
             <div
-              onClick={(e) => {
-                // console.log(e);
-                setShowFilterMenu(!showFilterMenu);
-              }
-              }
               style={{
                 backgroundColor: "#fff",
                 cursor: "pointer",
                 position: "relative",
               }}
             >
-              <img src="/filter.png" alt="filter_menu"
-                style={{
-                  height: "50px",
+              <div
+                onClick={(e) => {
+                  setShowFilterMenu(!showFilterMenu);
+                }
+                }
+              >
+
+                <img src="/filter.png" alt="filter_menu"
+                  style={{
+                    height: "50px",
 
 
-                }}
-              />
+                  }}
+                />
+              </div>
               {showFilterMenu && <Dropdown />}
             </div>
             {/* <Dropdown/> */}
 
           </div>
           {/* <button onClick={getData}>Get Data</button> */}
-          {/* {loading ? (<div>Loading...</div>) : ( */}
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              height: "100%",
-              gap: "10px",
-              marginTop: "10px"
-            }}
-          >
-            {
-              data?.map((item) => (
-                <div
-                  style={{
+          {loading ? (<div>Loading...</div>) : (
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                height: "100%",
+                gap: "10px",
+                marginTop: "10px"
+              }}
+            >
+              {
+                arr?.map((item) => (
+                  <div
+                    style={{
 
-                  }}
-                  onClick={() => {
-                    setActiveIndex(item.key)
-                    setSelected(item)
-                  }}
-                >
-                  {item.key === activeIndex ?
-                    <Display key={item.key} props={{ ...item, active: true }} />
-                    :
-                    <Display key={item.key} props={{ ...item, active: false }} />
-                  }
-                </div>
-              ))
-            }
-          </div>
-          {/* )} */}
+                    }}
+                    onClick={() => {
+                      setActiveIndex(item.key)
+                      setSelected(item)
+                    }}
+                  >
+                    {item.key === activeIndex ?
+                      <Display key={item.key} props={{ ...item, active: true }} />
+                      :
+                      <Display key={item.key} props={{ ...item, active: false }} />
+                    }
+                  </div>
+                ))
+              }
+            </div>
+          )}
         </div>
       </div>
     </div>
