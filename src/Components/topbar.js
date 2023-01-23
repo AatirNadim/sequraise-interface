@@ -33,7 +33,7 @@ const Topbar = () => {
                         fontSize: '4vh',
                     }}
                 >S</span>
-                EQUR
+                ECQUR
                 <span
                     style={{
                         color: "#e6020c",
