@@ -1,55 +1,45 @@
 import React from 'react'
 import { getStorage, ref, getDownloadURL } from "firebase/storage"
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 const ProfileCard = ({ props }) => {
-    console.log(props)
-    // const { name } = props
-    // const [image, setImage] = React.useState(null)
+    const { name } = props
+    const [image, setImage] = React.useState(null)
+    const [loading, setLoading] = React.useState(false)
 
-    // const getUserImage = () => {
-    //     console.log(props.value.Name)
-    //     const storage = getStorage();
-    //     getDownloadURL(ref(storage, `/${props.value.Name}.jpg`))
-    //         .then((url) => {
-    //             // `url` is the download URL for 'images/stars.jpg'
+    const getUserImage = () => {
+        setLoading(true)
+        const storage = getStorage();
+        getDownloadURL(ref(storage, `/${props.value.Name}.jpg`))
+            .then((url) => {
+                // `url` is the download URL for 'images/stars.jpg'
 
-    //             // This can be downloaded directly:
-    //             const xhr = new XMLHttpRequest();
-    //             xhr.responseType = 'blob';
-    //             xhr.onload = (event) => {
-    //                 const blob = xhr.response;
-    //             };
-    //             xhr.open('GET', url);
-    //             xhr.send();
+                // This can be downloaded directly:
+                const xhr = new XMLHttpRequest();
+                xhr.responseType = 'blob';
+                xhr.onload = (event) => {
+                    const blob = xhr.response;
+                };
+                xhr.open('GET', url);
+                xhr.send();
+                setImage(url)
+            })
+            .catch((error) => {
+                // Handle any errors
+                console.log(error)
+            });
+        setLoading(false)
+    }
 
-    //             // Or inserted into an <img> element
-    //             // const img = document.getElementById('myimg');
-    //             // img.setAttribute('src', url);
-    //             console.log(url)
-    //         })
-    //         .catch((error) => {
-    //             // Handle any errors
-    //         });
+    React.useEffect(() => {
 
-    // }
+        if (name !== null) {
+            setLoading(true)
+            getUserImage()
+            setLoading(false)
+        }
+    }, [])
 
-    // React.useEffect(() => {
-    //     if (props.value.Name!==null) {
-    //         getUserImage()
-    //     }
-    // }, [props.value.Name])
-
-    // {
-    //     "key": "0",
-    //     "value": {
-    //         "Date": "5-Jan-23",
-    //         "Gender": "Female",
-    //         "ID": "EVT0001",
-    //         "Location": "Bangalore",
-    //         "Name": "Female01",
-    //         "Time": "9:05:23"
-    //     }
-    // }
     return (
         <div
             style={{
@@ -69,7 +59,7 @@ const ProfileCard = ({ props }) => {
             {/* </div> */}
             {/* <div> */}
             {/* //image card  */}
-            {/* <img src={props.image} height="" width="" /> */}
+            {/* {loading ? <div>loading....</div> : <img src={image} height="100" width="100" />} */}
             {/* </div> */}
             {/* <h1>{props.name}</h1> */}
 
@@ -78,33 +68,45 @@ const ProfileCard = ({ props }) => {
             {/* </div> */}
             {/* details */}
             <div
-            style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-around",
-                flex: 0.5,
-                height: "93vh",
-            }}
+                style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-around",
+                    flex: 0.5,
+                    height: "93vh",
+                }}
 
             >
                 {/* person detected vla */}
                 <div
-                style={{
-                    backgroundColor: "red",
-                }}
+                    style={{
+                        backgroundColor: "red",
+                    }}
                 >
-                    <div>{props?.value.ID}</div>
-                    <div>{'Person detected'}</div>
+                    <div
+                        style={{
+                            // backgroundColor: "blue",
+                            fontWeight: "600",
+                            fontSize: "17px",
+                        }}
+                    >{props?.value.ID}</div>
+                    <div
+                        style={{
+                            fontWeight: "600",
+                        }}
+                    >{'Person detected'}</div>
                     {/* skdjskkd */}
                 </div>
                 {/* details */}
                 <div
-                style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    backgroundColor: "green",
-                }}
-                
+                    style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        backgroundColor: "green",
+                        height: "30%",
+                        justifyContent: "space-around",
+                    }}
+
                 >
                     <div
                     >
@@ -123,21 +125,38 @@ const ProfileCard = ({ props }) => {
                 </div>
                 {/* description */}
                 <div
-                style={{
-                    backgroundColor: "yellow",
-                }}
+                    style={{
+                        backgroundColor: "yellow",
+                    }}
                 >
                     <div>{'Description'}</div>
                 </div>
             </div>
             {/* image and gender */}
             <div
-            style={{
-                flex: 0.5,
-                height: "100%",
-            }}
+                style={{
+                    flex: 0.5,
+                    height: "100%",
+                }}
             >
-
+                <div
+                    style={{
+                        fontSize: "2vw",
+                        fontWeight: "bolder",
+                    }}
+                >
+                    {props?.value.Gender}
+                </div>
+                <div>
+                    <LazyLoadImage
+                        effect='blur'
+                        alt={"NOT AVAILABLE"}
+                        height={100}
+                        src={image} // use normal <img> attributes as props
+                        width={100}
+                        placeholderSrc="https://www.cgsusa.org/wp-content/uploads/cropped-placeholder.jpg"
+                    />
+                </div>
             </div>
         </div>
     )

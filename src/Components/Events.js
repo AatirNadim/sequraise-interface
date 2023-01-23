@@ -8,6 +8,8 @@ import Display from "./Display";
 import ProfileCard from "./profileCard";
 
 import { Dropdown } from "./Dropdown";
+import { useRecoilState } from "recoil";
+import { countState } from "./atoms/countAtom";
 
 export const Events = () => {
   const [data, setData] = React.useState([]);
@@ -15,6 +17,7 @@ export const Events = () => {
   const [selected, setSelected] = React.useState(null);
   const [showFilterMenu, setShowFilterMenu] = React.useState(false);
   const [imageUrl, setImageUrl] = React.useState(null);
+  const [count, setCount] = useRecoilState(countState);
 
   const getData = () => {
     setLoading(true);
@@ -26,6 +29,17 @@ export const Events = () => {
         arr = Object.entries(obj).map(
           ([key, value]) => ({ key, value })
         );
+        var countBoys = 0;
+        var countGirls = 0;
+        arr.forEach((item) => {
+          if (item.value.Gender === "Male") {
+            countBoys++;
+          }
+          else {
+            countGirls++;
+          }
+        });
+        setCount({ countBoys: countBoys, countGirls: countGirls })
         setData(arr);
       } else {
         console.log("No data available");

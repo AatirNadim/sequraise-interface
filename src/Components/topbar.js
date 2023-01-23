@@ -1,7 +1,11 @@
 import React from 'react'
-
+import { useRecoilState } from 'recoil';
+import { countState } from './atoms/countAtom';
 const Topbar = () => {
-    // const useContext = React.useContext(Usercontext);
+    const [count, setCount] = useRecoilState(countState);
+    console.log(count);
+
+
     return (
         <div
             style={{
@@ -47,12 +51,12 @@ const Topbar = () => {
                 }}
             >
                 <div
-                style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
+                    style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
 
-                }}
+                    }}
                 >
                     <input
                         style={{
@@ -63,10 +67,10 @@ const Topbar = () => {
                         }}
                     >
                     </input>
-                    <img src = "/icons8-search.svg" alt = "search_icon"
-                    style={{
-                        height : '20px',
-                    }}
+                    <img src="/icons8-search.svg" alt="search_icon"
+                        style={{
+                            height: '20px',
+                        }}
                     />
                 </div>
                 <div
@@ -81,7 +85,7 @@ const Topbar = () => {
                             padding: "5px 10px",
                         }}
                     >
-                        {'temp10'}
+                        {count?.countBoys}
                     </div>
                     <div
                         style={{
@@ -90,7 +94,7 @@ const Topbar = () => {
                             padding: "5px 10px",
                         }}
                     >
-                        {'temp20'}
+                        {count?.countGirls}
                     </div>
                 </div>
             </div>
